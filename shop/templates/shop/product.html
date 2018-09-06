@@ -37,7 +37,7 @@
                   <b>Out of Store</b>
                 </p>
               {% else %}
-                <a href="#" class="btn btn-secondary">Add to Cart</a>
+                <a href="{% url 'cart:add_cart' product.id %}" class="btn btn-secondary">Add to Cart</a>
               {% endif %}
             </div>
           </div>
