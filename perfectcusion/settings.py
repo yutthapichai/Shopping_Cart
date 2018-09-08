@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'search_app',
-    'cart'
+    'cart',
+    'stripe'
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,7 @@ STATICFILES_DIRS = (
     )
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'static','media')
+
+# stripe
+STRIPE_PUBLISHBLE_KEY = 'pk_test_DL13RoC8Z6o9lbtV2D7q7t7Q'
+STRIPE_SECRET_KEY = 'sk_test_9h2VzEI9zxVFPPv7OHn0SODe'
