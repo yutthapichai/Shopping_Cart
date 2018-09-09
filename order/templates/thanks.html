@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block metadescription %}
+    Thanks
+{% endblock %}
+
+{% block title %}
+     Thanks - perfect Custion store
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div>
+            <br>
+            <br>
+            <h1 class="text-center my_title">
+                 Thanks - perfect Custion your order
+            </h1>
+            <br>
+            <br>
+            <p>your order is number : {{ customer_order.id }}</p>
+            <br>
+            <p>
+                we have received your and will being processing right away
+            </p>
+        </div>
+    </div>
+{% endblock %}
