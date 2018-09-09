@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'shop',
     'search_app',
     'cart',
-    'stripe'
+    'stripe',
+    'order'
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,8 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR,'shop','templates/'),
             os.path.join(BASE_DIR,'search_app','templates/'),
-            os.path.join(BASE_DIR,'cart','templates/')
+            os.path.join(BASE_DIR,'cart','templates/'),
+            os.path.join(BASE_DIR,'order','templates/')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
