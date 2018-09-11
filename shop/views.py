@@ -4,7 +4,8 @@ from .models import Category,Product
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.contrib.auth.models import Group, User
 from .forms import SignUpForm 
-
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
 # Create your views here.
 def index(request):
     text_var = 'this is my first jungo app web page.'
@@ -48,3 +49,24 @@ def signupView(request):
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form':form})
+
+def loginView(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username,password=password)
+            if user is not None:
+                login(request,user)
+                return redirect('shop:allProdCat')
+            else:
+                return redirect("signup")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'accounts/login.html', {'form': form})
+
+
+def logoutView(request):
+    logout(request)
+    return redirect('login')
