@@ -142,3 +142,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'static','media')
 STRIPE_PUBLISHBLE_KEY = 'pk_test_DL13RoC8Z6o9lbtV2D7q7t7Q'
 STRIPE_SECRET_KEY = 'sk_test_9h2VzEI9zxVFPPv7OHn0SODe'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#email Message settings
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'postmaster@sandbox008e801415664f0bbfb2b6b481d20397.mailgun.org'
+EMAIL_HOST_PASSWORD = '79bd078ff43a86b9ac58441d2eca7cc2-7bbbcb78-ef0da0f4'

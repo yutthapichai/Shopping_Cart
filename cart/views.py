@@ -5,6 +5,8 @@ from django.core.exceptions import ObjectDoesNotExist
 import stripe
 from django.conf import settings
 from order.models import Order, OrderItem
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
 # Create your views here.
 def _cart_id(request):
     cart = request.session.session_key
@@ -105,6 +107,12 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
                     order_item.delete()
                     # the terminal will print this massage the order is save
                     print('the order has been create')
+                try:
+                    #clling the send email function
+                    sendEmail(order_details.id)
+                    print('the order Email has been sent to the customer')
+                except IOError as e:
+                    return e
                 return redirect('order:thanks', order_details.id)
             except ObjectDoesNotExist:
                 pass
@@ -129,3 +137,21 @@ def full_remove(request, product_id):
     cart_item = CartItem.objects.get(product=product, cart=cart)
     cart_item.delete()
     return redirect('cart:cart_detail')
+
+def sendEmail(order_id):
+    transaction = Order.objects.get(id=order_id)
+    order_items = OrderItem.objects.filter(order=transaction)
+    try:
+        subject = "Perfect Custion store - new #{}".format(transaction.id)
+        to = ['{}'.format(transaction.emailAddress)]
+        from_email = "shopping@stoerdc.com"
+        order_information = {
+        'transaction': transaction,
+        'order_item' : order_items
+        }
+        message = get_template('email/email.html').render(order_information)
+        msg = EmailMessage(subject,message, to=to, from_email=from_email)
+        msg.content_subtype = 'html'
+        msg.send()
+    except IOError as e:
+        return e

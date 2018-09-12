@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order #{{ transaction.id }} - Perfect Cushion Store</title>
+    <style>
+      table {
+        width: 60%;
+        margin:0 auto;
+        border-collapse: collapse;
+      }
+      table tr td {
+        border:1px solid #c1c1c1;
+      }
+      p {
+        padding-right:50px;
+        padding-left:50px;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1>Thank you for shopping with us</h1>
+      <p>This email is confirsm that you have placed an order</p>
+    </center>
+    <br>
+    <table>
+      <tr>
+        <td valign="top" colspan="2" style="width: 50%">
+          <b>Bill to:</b><br>
+          {{ transaction.billingname }}
+          {{ transaction.billingAddress1 }}
+          {{ transaction.billingCity }}
+          {{ transaction.bilingPostcode }}
+          {{ transaction.billingCountry }}
+        </td>
+        <td valign="top" colspan="2" style="width: 50%">
+          <b>Order: </b>#{{ transaction.id }}<br>
+          <b>Date: </b>{{ transaction.created|date:"d M Y"}}
+        </td>
+      </tr>
+      <tr>
+        <td><b>Product description</b></td>
+        <td><b>Qty</b></td>
+        <td><b>Unit Price</b></td>
+        <td><b>Sub-Total</b></td>
+      </tr>
+      {% for item in order_items %}
+        <tr>
+          <td>{{ item.prduct }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.sub_total }}</td>
+        </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="3" style="text-align:right"><b>Total</b></td>
+        <td>${{ transaction.total }}</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align:right"><b>Total paid </b></td>
+        <td>${{ transaction.total }}</td>
+      </tr>
+      <tr>
+        <td valign="top" colspan="2" style="width: 50%">
+          <b>Shi to:</b><br>
+          {{ transaction.shippingname }}
+          {{ transaction.shippingAddress1 }}
+          {{ transaction.shippingCity }}
+          {{ transaction.shippingPostcode }}
+          {{ transaction.shippingCountry }}
+        </td>
+        <td valign="top" colspan="2" style="width: 50%">
+          <b>Peyment details:</b>
+          ${{ transaction.total }} was paid successfully via Stripe.
+        </td>
+      </tr>
+    </table>
+    <center>
+      <br>
+      <p>id you are a registed custer and want to check your order history, please
+        <a href="http://127.0.0.1:8000/account/create/">Signup</a>
+        to create a new accountwith us
+      </p>
+    </center>
+  </body>
+</html>
