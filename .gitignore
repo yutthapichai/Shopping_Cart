@@ -1,2 +1,7 @@
 /staticfiles
-/static
+/static/css/all.min.css
+/static/css/bootstrap.min.css
+/static/img
+/static/js
+/static/media
+/static/webfonts
