@@ -3,12 +3,14 @@ from django.http import HttpResponse
 from .models import Category,Product
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.contrib.auth.models import Group, User
-from .forms import SignUpForm 
+from .forms import SignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 # Create your views here.
 def index(request):
-    text_var = 'this is my first jungo app web page.'
+    text_var = '<h1>This is my first jungo app web page.</h1>'
+    text_var += '<h1>Welcome to Shopping Cart</h1>'
+    text_var += '<a href="http://localhost:8000/shop">Click to shop</a>'
     return HttpResponse(text_var)
 
 def allProdCat(request, c_slug=None):
@@ -19,7 +21,7 @@ def allProdCat(request, c_slug=None):
         products_list = Product.objects.filter(category=c_page,available=True)
     else:
         products_list = Product.objects.all().filter(available=True)
-        paginator = Paginator(products_list, 6)
+    paginator = Paginator(products_list, 6)
     try:
         page = int(request.GET.get('page', '1'))
     except:

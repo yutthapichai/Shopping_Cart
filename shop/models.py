@@ -14,7 +14,7 @@ class Category(models.Model):
     def get_url(self):
         return reverse('shop:products_by_category', args=[self.slug])
     def __str__(self):
-        return '{}'.format(self.name)
+        return self.id
 
 class Product(models.Model):
     name = models.CharField(max_length=250, unique=True)
@@ -37,4 +37,4 @@ class Product(models.Model):
         return reverse('shop:ProdCatDetail', args=[self.category.slug, self.slug])
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return self.id
